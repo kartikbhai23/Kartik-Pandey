@@ -5,8 +5,439 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Resume - Kartik Pandey</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="resume-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Resume Page Styles */
+        .resume-header {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .resume-header h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .resume-header p {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.2s forwards;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.9rem 2rem;
+            background: var(--gradient);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.4s forwards;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 212, 255, 0.3);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Resume Container */
+        .resume-container {
+            padding: 3rem 2rem;
+        }
+
+        .resume-section {
+            margin-bottom: 4rem;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .resume-section:nth-child(1) { animation-delay: 0.6s; }
+        .resume-section:nth-child(2) { animation-delay: 0.8s; }
+        .resume-section:nth-child(3) { animation-delay: 1s; }
+        .resume-section:nth-child(4) { animation-delay: 1.2s; }
+
+        .section-title {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .section-title i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            animation: bounceIn 0.6s ease-out;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--text-primary);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Timeline Styles */
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-color) 0%, transparent 100%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2.5rem;
+            opacity: 0;
+            animation: slideInLeft 0.6s ease-out forwards;
+        }
+
+        .timeline-item:nth-child(1) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.4s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.6s; }
+        .timeline-item:nth-child(4) { animation-delay: 0.8s; }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -3rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-color);
+            border: 4px solid var(--bg-dark);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(0, 212, 255, 0.4);
+            }
+        }
+
+        .timeline-content {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-content p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .timeline-content ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 1rem;
+        }
+
+        .timeline-content ul li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-content ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .skill-category:nth-child(1) { animation-delay: 0.2s; }
+        .skill-category:nth-child(2) { animation-delay: 0.3s; }
+        .skill-category:nth-child(3) { animation-delay: 0.4s; }
+        .skill-category:nth-child(4) { animation-delay: 0.5s; }
+
+        .skill-category:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+        }
+
+        .skill-category h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category h3 i {
+            color: var(--primary-color);
+        }
+
+        .skill-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .badge {
+            padding: 0.6rem 1.2rem;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+
+        .skill-category:nth-child(1) .badge:nth-child(1) { animation-delay: 0.3s; }
+        .skill-category:nth-child(1) .badge:nth-child(2) { animation-delay: 0.4s; }
+        .skill-category:nth-child(1) .badge:nth-child(3) { animation-delay: 0.5s; }
+        .skill-category:nth-child(2) .badge:nth-child(1) { animation-delay: 0.4s; }
+        .skill-category:nth-child(2) .badge:nth-child(2) { animation-delay: 0.5s; }
+        .skill-category:nth-child(3) .badge:nth-child(1) { animation-delay: 0.5s; }
+        .skill-category:nth-child(3) .badge:nth-child(2) { animation-delay: 0.6s; }
+        .skill-category:nth-child(3) .badge:nth-child(3) { animation-delay: 0.7s; }
+        .skill-category:nth-child(4) .badge:nth-child(1) { animation-delay: 0.6s; }
+        .skill-category:nth-child(4) .badge:nth-child(2) { animation-delay: 0.7s; }
+
+        .badge:hover {
+            background: var(--primary-color);
+            color: var(--bg-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Certifications Grid */
+        .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .cert-card {
+            background: var(--bg-light);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .cert-card:nth-child(1) { animation-delay: 0.2s; }
+        .cert-card:nth-child(2) { animation-delay: 0.4s; }
+        .cert-card:nth-child(3) { animation-delay: 0.6s; }
+
+        .cert-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.2);
+        }
+
+        .cert-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            animation: bounceIn 0.8s ease-out;
+        }
+
+        .cert-card h3 {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .cert-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .cert-year {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(0, 212, 255, 0.1);
+            color: var(--primary-color);
+            border-radius: 15px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            .resume-header {
+                padding: 6rem 2rem 3rem;
+            }
+
+            .resume-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cert-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-marker {
+                left: -2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+
+            .cert-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .section-title {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -63,11 +494,11 @@
                             <span class="timeline-date">2021 - 2023</span>
                             <h3>Diploma in Mechanical Engineering</h3>
                             <h4>Uttarakhand Board of Technical Education</h4>
-                            <p>Completed my diploma  with 82% </p>
+                            <p>Completed my diploma with 82%</p>
                         </div>
                     </div>
                 
-                        <div class="timeline-item">
+                    <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2020 - 2021</span>
@@ -77,13 +508,13 @@
                         </div>
                     </div>
 
-                      <div class="timeline-item">
+                    <div class="timeline-item">
                         <div class="timeline-marker"></div>
                         <div class="timeline-content">
                             <span class="timeline-date">2018 - 2019</span>
                             <h3>Secondary Education or High School</h3>
                             <h4>Central Board of Secondary Education</h4>
-                            <p>I completed my Matriculation from from Mother's Glory Public School, Ramnagar, Nainiatal.</p>
+                            <p>I completed my Matriculation from Mother's Glory Public School, Ramnagar, Nainiatal.</p>
                         </div>
                     </div>
                 </div>
@@ -115,12 +546,12 @@
                         <div class="timeline-content">
                             <span class="timeline-date">Jan 2024 - May 2024</span>
                             <h3>1 Year apprenticeship in Mechanical Domain</h3>
-                            <h4>Bajaj Auto LTD </h4>
+                            <h4>Bajaj Auto LTD</h4>
                             <ul>
-                                <li>⚙️ Gained hands-on experience in automobile manufacturing and assembly processes. </li>
+                                <li>⚙️ Gained hands-on experience in automobile manufacturing and assembly processes.</li>
                                 <li>🧰 Worked with tools and machines under the supervision of senior engineers and technicians.</li>
                                 <li>🤝 Collaborated with team members to ensure timely completion of production targets.</li>
-                                <LI>🧠 Developed strong understanding of industrial operations, teamwork, and discipline.</li>
+                                <li>🧠 Developed strong understanding of industrial operations, teamwork, and discipline.</li>
                             </ul>
                         </div>
                     </div>
@@ -139,28 +570,20 @@
                         <div class="skill-badges">
                             <span class="badge">Python</span>
                             <span class="badge">C</span>
-                            <span class="badge">c++</span>
-                            <!-- <span class="badge">SQL</span> -->
-                            <!-- <span class="badge">R</span> -->
+                            <span class="badge">C++</span>
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3><i class="fas fa-brain"></i> ML/DL Frameworks</h3>
                         <div class="skill-badges">
-                            <!-- <span class="badge">TensorFlow</span> -->
-                            <!-- <span class="badge">Pandas</span> -->
-                            <!-- <span class="badge">Keras</span> -->
                             <span class="badge">Scikit-learn</span>
-                            <!-- <span class="badge">OpenCV</span> -->
                         </div>
                     </div>
                     <div class="skill-category">
                         <h3><i class="fas fa-tools"></i> Tools & Technologies</h3>
                         <div class="skill-badges">
                             <span class="badge">Git</span>
-                            <!-- <span class="badge">Docker</span> -->
                             <span class="badge">UV</span>
-                            <!-- <span class="badge">LangChain</span> -->
                             <span class="badge">FastAPI</span>
                         </div>
                     </div>
@@ -168,10 +591,7 @@
                         <h3><i class="fas fa-robot"></i> AI/ML Domains</h3>
                         <div class="skill-badges">
                             <span class="badge">Machine Learning</span>
-                            <span class="badge">Genrative AI</span>
-                            <!-- <span class="badge">NLP</span> -->
-                            <!-- <span class="badge">RL</span> -->
-                            <!-- <span class="badge">GANs</span> -->
+                            <span class="badge">Generative AI</span>
                         </div>
                     </div>
                 </div>
@@ -222,4 +642,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>        

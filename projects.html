@@ -14,9 +14,32 @@
             padding-top: 80px;
         }
 
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .main-nav.scrolled {
+            background: rgba(10, 14, 39, 0.98);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .main-nav.hidden {
+            transform: translateY(-100%);
+        }
+
         .projects-header {
             padding: 4rem 2rem 3rem;
             text-align: center;
+            transition: transform 0.3s ease-out;
+            will-change: transform;
         }
 
         .projects-header h1 {
@@ -26,6 +49,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
         }
 
         .projects-header::after {
@@ -36,6 +61,39 @@
             background: var(--gradient);
             margin: 1.5rem auto 0;
             border-radius: 2px;
+            opacity: 0;
+            animation: scaleIn 0.6s ease-out 0.3s forwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scaleX(0);
+            }
+            to {
+                opacity: 1;
+                transform: scaleX(1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
 
         .filter-tabs {
@@ -46,6 +104,8 @@
             padding: 0 2rem;
             flex-wrap: wrap;
             justify-content: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out 0.5s forwards;
         }
 
         .filter-btn {
@@ -58,7 +118,15 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
         }
+
+        .filter-btn:nth-child(1) { animation-delay: 0.6s; }
+        .filter-btn:nth-child(2) { animation-delay: 0.7s; }
+        .filter-btn:nth-child(3) { animation-delay: 0.8s; }
+        .filter-btn:nth-child(4) { animation-delay: 0.9s; }
+        .filter-btn:nth-child(5) { animation-delay: 1s; }
 
         .filter-btn:hover {
             background: rgba(0, 212, 255, 0.1);
@@ -93,11 +161,22 @@
             transition: all 0.4s ease;
             opacity: 0;
             transform: translateY(20px);
+            position: relative;
         }
 
         .project-card.visible {
-            opacity: 1;
-            transform: translateY(0);
+            animation: slideInUp 0.6s ease-out forwards;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .project-card:hover {
@@ -125,8 +204,60 @@
             transform: scale(1.1);
         }
 
+        /* Project Links Overlay */
+        .project-links-overlay {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 10;
+        }
+
+        .project-link-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 212, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--bg-dark);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+
+        .project-card:hover .project-link-btn {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .project-link-btn:nth-child(1) {
+            transition-delay: 0.1s;
+        }
+
+        .project-link-btn:nth-child(2) {
+            transition-delay: 0.2s;
+        }
+
+        .project-link-btn:hover {
+            background: var(--primary-color);
+            transform: scale(1.15) translateY(0);
+        }
+
         .project-content {
             padding: 2rem;
+        }
+
+        .project-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
         }
 
         .project-category {
@@ -139,7 +270,6 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 1rem;
             color: var(--primary-color);
         }
 
@@ -155,24 +285,6 @@
             color: var(--text-secondary);
             line-height: 1.7;
             font-size: 0.95rem;
-        }
-
-        /* Loading state */
-        .loading {
-            text-align: center;
-            padding: 4rem 2rem;
-            color: var(--text-secondary);
-        }
-
-        .loading i {
-            font-size: 3rem;
-            color: var(--primary-color);
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
         }
 
         /* Responsive Design */
@@ -229,6 +341,11 @@
             .filter-tabs {
                 padding: 0 1rem;
             }
+
+            .project-link-btn {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -260,90 +377,40 @@
         <button class="filter-btn active" data-filter="all">All</button>
         <button class="filter-btn" data-filter="machine-learning">Machine Learning</button>
         <button class="filter-btn" data-filter="deep-learning">Deep Learning</button>
-        <button class="filter-btn" data-filter="web">Web Development</button>
+        <button class="filter-btn" data-filter="other">Other</button>
     </div>
 
     <!-- Projects Container -->
     <div class="projects-container">
         <div class="projects-grid" id="projectsGrid">
-            <!-- Projects will be loaded here -->
-            <div class="project-card visible" data-category="machine-learning">
+            
+            <!-- Sky View Weather Dashboard -->
+            <div class="project-card visible" data-category="api,other">
                 <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1536240478700-b869070f9279?w=800&h=600&fit=crop" alt="Movie Recommendation System">
+                    <img src="https://github.com/kartikbhai23/Sky-View/raw/main/screenshots/homepage.png" alt="Sky View Weather Dashboard">
+                    <div class="project-links-overlay">
+                        <a href="https://github.com/kartikbhai23/Sky-View.git" class="project-link-btn" target="_blank" rel="noopener noreferrer" title="View on GitHub">
+                            <i class="fab fa-github"></i>
+                        </a>
+                        <a href="https://sky-view-rizo.onrender.com/" class="project-link-btn" target="_blank" rel="noopener noreferrer" title="Live Demo">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
                 </div>
                 <div class="project-content">
-                    <span class="project-category">Machine Learning</span>
-                    <h2 class="project-title">Movie Recommendation System</h2>
+                    <div class="project-categories">
+                        <span class="project-category">API</span>
+                        <span class="project-category">Other</span>
+                    </div>
+                    <h2 class="project-title">Sky View - Weather Dashboard</h2>
                     <p class="project-description">
-                        An intelligent recommendation engine that uses collaborative filtering and content-based algorithms to suggest personalized movie recommendations based on user preferences and viewing history.
+                        Real-time weather application fetching live data using OpenWeather API. Features current conditions, forecasts, and location-based weather information.
                     </p>
                 </div>
             </div>
 
-            <div class="project-card visible" data-category="deep-learning">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop" alt="Digit Recognition">
-                </div>
-                <div class="project-content">
-                    <span class="project-category">Deep Learning</span>
-                    <h2 class="project-title">Digit Recognition</h2>
-                    <p class="project-description">
-                        Neural network-based handwritten digit recognition system using convolutional neural networks (CNN) trained on the MNIST dataset, achieving high accuracy in real-time digit classification.
-                    </p>
-                </div>
-            </div>
-
-            <div class="project-card visible" data-category="machine-learning">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="Data Visualization">
-                </div>
-                <div class="project-content">
-                    <span class="project-category">Machine Learning</span>
-                    <h2 class="project-title">Advanced Data Clustering</h2>
-                    <p class="project-description">
-                        Interactive visualization tool for exploring multidimensional datasets using K-means clustering and DBSCAN algorithms with dynamic parameter tuning and real-time cluster analysis.
-                    </p>
-                </div>
-            </div>
-
-            <div class="project-card visible" data-category="machine-learning">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1544725176-7c40e5a71c5e?w=800&h=600&fit=crop" alt="Titanic Survival">
-                </div>
-                <div class="project-content">
-                    <span class="project-category">Machine Learning</span>
-                    <h2 class="project-title">Titanic Survival Prediction</h2>
-                    <p class="project-description">
-                        Predictive model analyzing passenger data from the Titanic disaster to determine survival probability using ensemble methods, feature engineering, and cross-validation techniques.
-                    </p>
-                </div>
-            </div>
-
-            <div class="project-card visible" data-category="web">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=600&fit=crop" alt="Portfolio Dashboard">
-                </div>
-                <div class="project-content">
-                    <span class="project-category">Web Development</span>
-                    <h2 class="project-title">Interactive Portfolio Dashboard</h2>
-                    <p class="project-description">
-                        Modern, responsive portfolio website featuring dynamic project showcases, smooth animations, and an intuitive user interface built with cutting-edge web technologies.
-                    </p>
-                </div>
-            </div>
-
-            <div class="project-card visible" data-category="deep-learning">
-                <div class="project-image">
-                    <img src="https://images.unsplash.com/photo-1507146426996-ef05306b995a?w=800&h=600&fit=crop" alt="Image Classification">
-                </div>
-                <div class="project-content">
-                    <span class="project-category">Deep Learning</span>
-                    <h2 class="project-title">Image Classification Network</h2>
-                    <p class="project-description">
-                        Deep learning model for multi-class image classification using transfer learning with pre-trained architectures, fine-tuned for custom dataset with data augmentation techniques.
-                    </p>
-                </div>
-            </div>
+            <!-- Add more projects here following the same structure -->
+            
         </div>
     </div>
 
@@ -362,7 +429,41 @@
 
     <script src="scripts.js"></script>
     <script>
-        // Filter functionality
+        // Navbar and Header scroll behavior
+        let lastScrollTop = 0;
+        const nav = document.querySelector('.main-nav');
+        const header = document.querySelector('.projects-header');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Add scrolled class for enhanced background
+            if (scrollTop > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+            
+            // Hide/show navbar based on scroll direction
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling down - move header down slightly
+                nav.classList.add('hidden');
+                header.style.transform = 'translateY(20px)';
+            } else {
+                // Scrolling up - move header up
+                nav.classList.remove('hidden');
+                header.style.transform = 'translateY(-10px)';
+            }
+            
+            // Reset header position at top
+            if (scrollTop <= 50) {
+                header.style.transform = 'translateY(0)';
+            }
+            
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+
+        // Filter functionality with support for multiple categories
         const filterBtns = document.querySelectorAll('.filter-btn');
         const projectCards = document.querySelectorAll('.project-card');
 
@@ -375,19 +476,20 @@
 
                 const filter = btn.getAttribute('data-filter');
 
-                projectCards.forEach(card => {
+                projectCards.forEach((card, index) => {
+                    const categories = card.getAttribute('data-category').split(',');
+                    
                     if (filter === 'all') {
                         card.style.display = 'block';
                         setTimeout(() => {
                             card.classList.add('visible');
-                        }, 10);
+                        }, index * 100);
                     } else {
-                        const category = card.getAttribute('data-category');
-                        if (category === filter) {
+                        if (categories.includes(filter)) {
                             card.style.display = 'block';
                             setTimeout(() => {
                                 card.classList.add('visible');
-                            }, 10);
+                            }, index * 100);
                         } else {
                             card.classList.remove('visible');
                             setTimeout(() => {
@@ -404,7 +506,7 @@
             projectCards.forEach((card, index) => {
                 setTimeout(() => {
                     card.classList.add('visible');
-                }, index * 100);
+                }, index * 150);
             });
         });
     </script>
