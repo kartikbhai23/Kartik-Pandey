@@ -8,7 +8,8 @@
     --primary-color: #00d4ff;
     --secondary-color: #0099cc;
     --accent-color: #00ffcc;
-    --bg-dark: #0f1419;
+    /* --bg-dark: #0f1419; */
+    --bg-dark: rgba(15, 20, 25, 0.95);;
     --bg-light: #1a1f2e;
     --text-primary: #ffffff;
     --text-secondary: #a8b2d1;
