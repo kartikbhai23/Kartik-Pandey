@@ -1,0 +1,253 @@
+/* My Work Page Styles */
+
+.work-header {
+    /* background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(0, 153, 204, 0.1) 100%); */
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    margin-top: 60px;
+}
+
+.work-header h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.work-header p {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+}
+
+.work-container {
+    padding: 3rem 2rem;
+}
+
+/* Featured Grid */
+.featured-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+/* Featured Card */
+.featured-card {
+    background: var(--bg-light);
+    border-radius: 15px;
+    border: 1px solid rgba(0, 212, 255, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.featured-card.large {
+    grid-column: span 2;
+}
+
+.featured-card:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2);
+}
+
+/* Card Image */
+.card-image {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16 / 10;
+}
+
+.featured-card.large .card-image {
+    aspect-ratio: 21 / 9;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-card:hover .card-image img {
+    transform: scale(1.1);
+}
+
+.card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.featured-card:hover .card-overlay {
+    opacity: 1;
+}
+
+.overlay-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.overlay-btn {
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+}
+
+.overlay-btn:hover {
+    background: var(--accent-color);
+    transform: scale(1.15);
+}
+
+/* Card Content */
+.card-content {
+    padding: 2rem;
+}
+
+.featured-card.large .card-content {
+    padding: 2.5rem;
+}
+
+.card-category {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.card-content h2,
+.card-content h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.card-content h2 {
+    font-size: 1.8rem;
+}
+
+.card-content h3 {
+    font-size: 1.4rem;
+}
+
+.card-content p {
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+/* Card Tags */
+.card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.card-tags span {
+    padding: 0.5rem 1rem;
+    background: rgba(0, 212, 255, 0.1);
+    color: var(--primary-color);
+    border: 1px solid rgba(0, 212, 255, 0.2);
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.card-tags span:hover {
+    background: var(--primary-color);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+}
+
+/* Card Stats */
+.card-stats {
+    display: flex;
+    gap: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+.stat-item i {
+    color: var(--primary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+    .work-header {
+        padding: 6rem 2rem 3rem;
+    }
+
+    .work-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .featured-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .featured-card.large {
+        grid-column: span 1;
+    }
+
+    .card-content {
+        padding: 1.5rem;
+    }
+
+    .featured-card.large .card-content {
+        padding: 1.5rem;
+    }
+
+    .card-stats {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .work-header h1 {
+        font-size: 2rem;
+    }
+
+    .card-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .card-content h3 {
+        font-size: 1.2rem;
+    }
+
+    .overlay-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+}
