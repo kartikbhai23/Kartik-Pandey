@@ -126,13 +126,13 @@ const CONFIG_TECH_STACK = [
 
 const CONFIG_PROJECTS = [
     {
-        name: 'Sky View - Weather Dashboard',
-        cover: 'https://raw.githubusercontent.com/kartikbhai23/Sky-View/refs/heads/main/screenshots/homepage.png',
+        name: 'Personal Portfolio Website',
+        cover: 'assets/images/sky-view.png',
         category: 'API',
         github: 'https://github.com/kartikbhai23/Sky-View.git',
         demo: 'https://sky-view-rizo.onrender.com/',
         description: 'Real-time weather application fetching live data using OpenWeather API. Features current conditions, forecasts, and location-based weather information.',
-    }
+    },
 ];
 
 const CONFIG_GITHUB_USER = 'kartikbhai23';
