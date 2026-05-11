@@ -127,7 +127,7 @@ const CONFIG_TECH_STACK = [
 const CONFIG_PROJECTS = [
     {
         name: 'Sky View - Weather Dashboard',
-        cover: './assets/images/sky-view.png',
+        cover: 'sky-view.png',
         category: 'API',
         github: 'https://github.com/kartikbhai23/Sky-View.git',
         demo: 'https://sky-view-rizo.onrender.com/',
